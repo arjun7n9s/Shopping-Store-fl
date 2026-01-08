@@ -1,0 +1,133 @@
+.container {
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    font-family: var(--font-roboto-mono);
+}
+
+/* Category Icons Section */
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+}
+
+.categoryItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.categoryItem:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.catIcon {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.5px;
+    color: var(--text-primary);
+}
+
+.catLabel {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+/* Sort & Filter Section */
+.filters {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pill {
+    padding: 0.6rem 1.5rem;
+    border: 1px solid var(--bg-tertiary);
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-roboto-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pill:hover {
+    background: var(--bg-secondary);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.active {
+    background: var(--text-primary);
+    color: var(--text-contrast);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-1px);
+    font-weight: 700;
+    border-color: var(--text-primary);
+}
+
+.active:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--text-contrast);
+}
+
+/* Price Toggle Specifics */
+.priceIcon {
+    width: 14px;
+    height: 14px;
+}
+
+@media (max-width: 768px) {
+    .categories {
+        gap: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: 100%;
+        padding: 0 1rem;
+        justify-items: center;
+    }
+
+    .categoryItem {
+        min-width: unset;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .categories:not(.expanded) .categoryItem:nth-child(n+4) {
+        display: none;
+    }
+
+    .mobileToggle {
+        display: flex !important;
+    }
+}
+
+.mobileToggle {
+    display: none;
+}

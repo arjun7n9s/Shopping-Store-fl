@@ -1,0 +1,22 @@
+.hero {
+    width: 100%;
+    height: 60vh;
+    /* Static height */
+    background-color: #e0e0e0;
+    /* Static color placeholder */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    padding-top: 120px;
+    /* Offset for fixed navbar to prevent content overlap */
+}
+
+.title {
+    font-family: var(--font-anton);
+    font-size: 4rem;
+    color: #333;
+    opacity: 0.2;
+    /* Watermark style */
+}
+@media (max-width: 768px) { .title { font-size: 2rem; text-align: center; width: 100%; display: block; } }

@@ -1,0 +1,106 @@
+import type { Metadata } from "next";
+import {
+  Roboto_Mono,
+  Oswald,
+  Yuji_Boku,
+  Exo_2,
+  Pirata_One,
+  Archivo_Narrow,
+  Badeen_Display,
+  Playfair_Display,
+  Anton
+} from "next/font/google";
+import "./globals.css";
+import { CartProvider } from '@/context/CartContext';
+import { AuthProvider } from '@/context/AuthContext';
+
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-roboto-mono",
+  display: 'swap',
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  variable: "--font-oswald",
+  display: 'swap',
+});
+
+const yujiBoku = Yuji_Boku({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-yuji-boku",
+  display: 'swap',
+});
+
+const exo2 = Exo_2({
+  subsets: ["latin"],
+  variable: "--font-exo-2",
+  display: 'swap',
+});
+
+const pirataOne = Pirata_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pirata-one",
+  display: 'swap',
+});
+
+const archivoNarrow = Archivo_Narrow({
+  subsets: ["latin"],
+  variable: "--font-archivo-narrow",
+  display: 'swap',
+});
+
+const badeenDisplay = Badeen_Display({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-badeen-display",
+  display: 'swap',
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair-display",
+  display: 'swap',
+});
+
+const anton = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-anton",
+  display: 'swap',
+});
+
+export const metadata: Metadata = {
+  title: "Shopping Store",
+  description: "Nationwide Clothing Store",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className={`
+        ${robotoMono.variable}
+        ${oswald.variable}
+        ${yujiBoku.variable}
+        ${exo2.variable}
+        ${pirataOne.variable}
+        ${archivoNarrow.variable}
+        ${badeenDisplay.variable}
+        ${playfairDisplay.variable}
+        ${anton.variable}
+      `}>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}

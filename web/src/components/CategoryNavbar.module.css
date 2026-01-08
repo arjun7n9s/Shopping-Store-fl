@@ -1,0 +1,267 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 20px -5px rgba(62, 60, 56, 0.1);
+    /* Soft shadow with theme color */
+    font-family: var(--font-roboto-mono);
+}
+
+.topRow {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    transition: background-color 0.3s ease;
+    background-color: var(--color-base);
+    /* Default Solid */
+}
+
+.bottomRow {
+    width: 100%;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--color-surface);
+    /* Default Solid */
+    border-top: 1px solid var(--color-border);
+    /* Default Border */
+}
+
+/* State: Transparent (at top) */
+.transparent .topRow {
+    background-color: transparent !important;
+}
+
+.transparent .bottomRow {
+    background-color: transparent !important;
+    border-top-color: transparent !important;
+}
+
+/* State: Solid (scrolled) - Class no longer needed for bg, but kept if used elsewhere */
+.solid .topRow {
+    /* bg handled by default .topRow */
+}
+
+.solid .bottomRow {
+    /* bg handled by default .bottomRow */
+}
+
+.navLink {
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-text-primary);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.navLink:hover {
+    color: var(--color-text-secondary);
+    opacity: 0.8;
+}
+
+.hidden {
+    transform: translateY(-100%);
+}
+
+.logoContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 90px;
+    width: auto;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+.searchContainer {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.searchBar {
+    width: 100%;
+    max-width: 500px;
+    height: 40px;
+    background-color: transparent;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    border: 1px solid var(--color-border);
+    /* Thin line border */
+    transition: border-color 0.2s;
+    gap: 0.8rem;
+}
+
+.searchBar:focus-within {
+    border-color: var(--color-text-primary);
+}
+
+.searchInput {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: var(--font-roboto-mono);
+    color: var(--color-text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.searchInput::placeholder {
+    color: var(--color-text-secondary);
+    opacity: 0.7;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+}
+
+.searchIcon {
+    opacity: 0.6;
+}
+
+.desktopSearch {
+    display: block;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mobileSearchToggle {
+    display: none;
+    cursor: pointer;
+}
+
+.mobileSearchBarContainer {
+    width: 100%;
+    background: var(--color-base);
+    border-bottom: 1px solid var(--color-border);
+    overflow: hidden;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.mobileSearchBar {
+    width: 100%;
+    height: 40px;
+    background-color: var(--color-surface);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    border: 1px solid var(--color-border);
+    gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .desktopSearch {
+        display: none;
+    }
+
+    .mobileSearchToggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .searchContainer {
+        justify-content: flex-end;
+        padding-right: 1rem;
+    }
+}
+
+.iconsContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.icon {
+    width: 22px;
+    height: 22px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    stroke-width: 1.5px;
+    transition: color 0.2s;
+}
+
+.icon:hover {
+    color: var(--color-text-secondary);
+}
+
+.cartContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #B84A4A;
+    /* Muted Red */
+    color: var(--color-base);
+    font-size: 0.7rem;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .mobileHidden {
+        display: none !important;
+    }
+
+    .logo {
+        margin-left: 10px;
+    }
+
+    .hideLogoOnMobile {
+        display: none !important;
+    }
+
+    .bottomRow {
+        gap: 1rem;
+        padding: 0.8rem 5px;
+        justify-content: space-evenly;
+        /* Distribute evenly */
+        white-space: nowrap;
+    }
+
+    .navLink {
+        font-size: 0.7rem;
+        /* Smaller font */
+        letter-spacing: 0;
+    }
+}

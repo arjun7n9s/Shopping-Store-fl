@@ -1,0 +1,106 @@
+/* Extracted from ProductGrid.module.css */
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    /* Ensure link doesn't underline */
+}
+
+.imageWrapper {
+    width: 100%;
+    aspect-ratio: 0.8;
+    background-color: var(--color-surface);
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.productImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+/* Hover scales main image if no slideshow, or maybe we remove this scaler if sliding. 
+   User said "premium way", sliding images. 
+   Let's keep scale for initial hover but maybe disable if activeSlide > 0? 
+   Or just keep it as background effect. */
+.card:hover .productImage {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #B84A4A;
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    text-transform: uppercase;
+    z-index: 5;
+    letter-spacing: 0.5px;
+}
+
+.likeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.likeBtn:hover {
+    transform: scale(1.1);
+}
+
+.details {
+    margin-top: 0.8rem;
+    font-family: var(--font-roboto-mono);
+}
+
+.name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+}
+
+.price {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+}
+
+/* Slideshow overlay */
+.slideOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    /* Above image, below badge/likeBtn */
+    font-family: var(--font-roboto-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

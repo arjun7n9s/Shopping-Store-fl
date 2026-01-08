@@ -1,0 +1,216 @@
+.footer {
+    background-color: var(--dark-primary);
+    color: var(--bg-secondary);
+    padding: 4rem 2rem 2rem;
+    font-family: var(--font-roboto-mono);
+}
+
+.topSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.brandColumn {
+    flex: 1;
+    min-width: 250px;
+}
+
+.logo {
+    display: block;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 2rem;
+    /* Invert to make it light if original is dark, adjusting specifically for the new dark bg */
+    filter: brightness(0) invert(1) opacity(0.9);
+}
+
+.socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.socialIcon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--bg-secondary);
+}
+
+.socialIcon:hover {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.linksColumn {
+    flex: 1;
+    min-width: 150px;
+}
+
+.columnTitle {
+    font-family: var(--font-anton);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    /* Soft highlight for titles */
+}
+
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.linkItem {
+    margin-bottom: 0.8rem;
+}
+
+.link {
+    color: var(--bg-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.link:hover {
+    color: var(--accent-primary);
+}
+
+.newsletterColumn {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.newsletterTitle {
+    font-family: var(--font-anton);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+}
+
+.newsletterText {
+    font-size: 0.9rem;
+    color: var(--bg-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+.inputGroup {
+    display: flex;
+    border-bottom: 1px solid var(--bg-tertiary);
+    padding-bottom: 0.5rem;
+    transition: border-color 0.3s;
+}
+
+.inputGroup:focus-within {
+    border-bottom-color: var(--accent-primary);
+}
+
+.emailInput {
+    background: transparent;
+    border: none;
+    color: var(--text-contrast);
+    flex: 1;
+    outline: none;
+    font-family: var(--font-roboto-mono);
+}
+
+.submitBtn {
+    background: transparent;
+    border: none;
+    color: var(--bg-secondary);
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.submitBtn:hover {
+    color: var(--accent-primary);
+}
+
+.bottomSection {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.bottomLinks {
+    display: flex;
+    gap: 2rem;
+}
+
+.bottomLink {
+    font-size: 0.8rem;
+    color: var(--bg-tertiary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.bottomLink:hover {
+    color: var(--accent-primary);
+}
+
+.scrollToTop {
+    background: var(--bg-secondary);
+    color: var(--dark-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.scrollToTop:hover {
+    transform: translateY(-5px);
+    background-color: var(--accent-primary);
+    color: var(--text-contrast);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .topSection {
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+
+    .brandColumn,
+    .linksColumn,
+    .newsletterColumn {
+        min-width: 100%;
+        /* Full width on mobile */
+    }
+
+    .bottomSection {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .bottomLinks {
+        flex-direction: column;
+        /* Stack bottom links */
+        gap: 1rem;
+        align-items: center;
+    }
+}

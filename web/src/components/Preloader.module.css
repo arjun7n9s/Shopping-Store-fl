@@ -1,0 +1,59 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+    /* Allow clicks through during exit if needed, but usually block */
+}
+
+.columnWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.column {
+    flex: 1;
+    height: 100%;
+    transform-origin: top;
+}
+
+.contentLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.title {
+    font-family: 'Anton', sans-serif;
+    font-size: 5rem;
+    color: #FFFFFF;
+    line-height: 0.9;
+    text-align: center;
+    text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.hollow {
+    color: transparent;
+    -webkit-text-stroke: 2px #FFFFFF;
+}
+
+/* Tablet/Desktop adjustments */
+@media (min-width: 768px) {
+    .title {
+        font-size: 8rem;
+    }
+}

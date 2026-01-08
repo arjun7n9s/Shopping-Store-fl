@@ -1,0 +1,182 @@
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+}
+
+.slideContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    text-align: center;
+    padding-bottom: 5vh;
+}
+
+.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Background Gradients - Soft, Muted, Colorful */
+/* Background Gradients - Rich, Deep, Premium */
+.bg1 {
+    background: linear-gradient(135deg, #E6B9A6 0%, #9EB8AB 100%);
+    /* Rich Terracotta to Sage */
+}
+
+.bg2 {
+    background: linear-gradient(135deg, #D4C3DB 0%, #EBE6DC 100%);
+    /* Deep Lavender to Bone */
+}
+
+.bg3 {
+    background: linear-gradient(135deg, #B4C5C8 0%, #D6CDBF 100%);
+    /* Steel Blue to Dark Sand */
+}
+
+.bg4 {
+    background: linear-gradient(135deg, #D6BABA 0%, #C5C9B4 100%);
+    /* Dusky Rose to Olive */
+}
+
+.content {
+    z-index: 10;
+    max-width: 80%;
+    text-align: center;
+    padding: 2rem;
+    /* Optional: Add a subtle glass effect behind text if contrast is low, but with dark text on pastel it should be fine */
+}
+
+.title {
+    font-size: 4rem;
+    font-family: var(--font-archivo-narrow), sans-serif;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    /* No text shadow for a cleaner look, or very subtle */
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.shopButton {
+    padding: 1rem 2.5rem;
+    background-color: var(--text-primary);
+    color: var(--text-contrast);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-soft);
+}
+
+.shopButton:hover {
+    transform: translateY(-2px);
+    background-color: var(--accent-primary);
+    color: var(--text-contrast);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Dots */
+.dotsContainer {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5rem;
+    z-index: 20;
+}
+
+.dotWrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--text-secondary);
+    opacity: 0.3;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.activeDot {
+    background-color: var(--text-primary);
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Circular Loader */
+.loaderSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: rotate(-90deg);
+}
+
+.progressCircle {
+    fill: none;
+    stroke: var(--text-primary);
+    stroke-width: 2;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+        letter-spacing: 0;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .slide {
+        padding-bottom: 10vh;
+    }
+
+    .shopButton {
+        padding: 0.8rem 2rem;
+        font-size: 0.8rem;
+    }
+}

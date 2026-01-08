@@ -1,0 +1,294 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+    transition: background-color 0.3s ease;
+    /* backdrop-filter: blur(10px); Optional: add if needed for legibility */
+    color: var(--text-primary);
+    /* Changed to dark text for light pastel hero */
+}
+
+.left,
+.right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+.center {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: visible;
+    color: var(--text-primary);
+}
+
+.navLink {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+}
+
+.navLink:hover {
+    color: var(--accent-primary);
+    text-decoration: none;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    stroke-width: 2px;
+    color: var(--text-primary);
+    transition: color 0.2s ease;
+}
+
+.icon:hover {
+    color: var(--accent-primary);
+}
+
+.bagContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--accent-primary);
+    color: var(--text-contrast);
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Interactive Search */
+.searchWrapper {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: text;
+    overflow: visible;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.searchWrapper:focus-within {
+    border-bottom-color: var(--accent-secondary);
+}
+
+.searchContent {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 8px;
+    height: 100%;
+}
+
+.searchInput {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    width: 100%;
+    font-family: inherit;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.searchInput::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.searchCloseBtn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.searchCloseBtn:hover {
+    color: var(--accent-primary);
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-md);
+    margin-top: 10px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    padding: 5px 0;
+    border: 1px solid var(--bg-tertiary);
+}
+
+.suggestionItem {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.suggestionItem:hover {
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+}
+
+/* Drawer Content Styles */
+.drawerItem {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.itemImgPlaceholder {
+    width: 80px;
+    height: 100px;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+}
+
+.itemInfo h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.drawerFooter {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.viewCartBtn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-primary);
+    color: var(--text-contrast);
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: var(--border-radius-sm);
+    transition: opacity 0.2s ease;
+}
+
+.viewCartBtn:hover {
+    opacity: 0.9;
+}
+
+.walletCard {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.walletCard h2 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    color: var(--accent-primary);
+}
+
+/* Mobile Menu Button */
+.menuBtn {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    z-index: 1001;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .menuBtn {
+        display: block;
+    }
+
+    .center {
+        justify-content: center;
+        text-align: center;
+        flex: 2;
+    }
+
+    .brand {
+        font-size: 1.2rem;
+    }
+
+    .right {
+        gap: 0.8rem;
+    }
+
+    .searchWrapper {
+        display: none;
+    }
+}

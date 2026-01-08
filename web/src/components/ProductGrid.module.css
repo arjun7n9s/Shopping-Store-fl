@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.viewMoreBtn {
+    margin: 2rem 0 4rem 0;
+    padding: 1rem 4rem;
+    background: var(--color-text-primary);
+    color: var(--color-base);
+    font-family: var(--font-roboto-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    border-radius: 4px;
+}
+
+.viewMoreBtn:hover {
+    opacity: 0.8;
+}
+
+/* Card styles moved to ProductCard.module.css */
+/* Kept clean */
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        padding: 0 1rem;
+    }
+
+    .viewMoreBtn {
+        width: 90%;
+        padding: 1rem;
+    }
+}
