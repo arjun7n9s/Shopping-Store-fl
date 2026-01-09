@@ -18,7 +18,7 @@ export default function FadeIn({ children, delay = 0, direction = 'up', classNam
         const distance = 40;
         const variants = {
             hidden: { opacity: 0, x: 0, y: 0 },
-            visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.8, delay, ease: "easeOut" } },
+            visible: { opacity: 1, x: 0, y: 0, transition: { duration: 0.8, delay, ease: "easeOut" as const } },
         };
 
         if (direction === 'up') variants.hidden.y = distance;
