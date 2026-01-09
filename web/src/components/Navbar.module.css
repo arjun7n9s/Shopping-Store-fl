@@ -292,3 +292,12 @@
         display: none;
     }
 }
+
+.scrolled {
+    background: rgba(234, 229, 223, 0.8);
+    /* var(--bg-primary) with opacity */
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
+    padding: 0.8rem 2rem;
+    /* Slightly smaller padding */
+}

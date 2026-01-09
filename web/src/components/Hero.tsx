@@ -1,49 +1,18 @@
-// I should create the missing pages first before linking to avoid 404s.
-// I'll defer this tool call and create the missing pages first.
+'use client';
 
-
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
 import styles from './Hero.module.css';
+import FadeIn from './animations/FadeIn';
+import MagneticButton from './animations/MagneticButton';
 
-const SLIDE_DURATION = 2000; // 2 seconds
+const SLIDE_DURATION = 5000;
 
 const slides = [
-    {
-        id: 1,
-        title: "CASUAL WEAR",
-        bgClass: "bg1", // Gradients defined in CSS for now
-        font: 'var(--font-roboto-mono)',
-        link: '/casual-wear'
-    },
-    {
-        id: 2,
-        title: "STREET STYLE",
-        bgClass: "bg2",
-        font: 'var(--font-yuji-boku)',
-        link: '/street-style'
-    },
-    {
-        id: 3,
-        title: "PREMIUM LUXURY",
-        bgClass: "bg3",
-        font: 'var(--font-playfair-display)',
-        link: '/premium-luxury'
-    },
-    {
-        id: 4,
-        title: "TRADITIONALS",
-        bgClass: "bg4",
-        font: 'var(--font-pirata-one)',
-        link: '/traditionals'
-    },
-    {
-        id: 5,
-        title: "MERCHANDISE",
-        bgClass: "bg1", // Reusing bg1 or need new logic for colors later
-        font: 'var(--font-anton)',
-        link: '/merchandise'
-    }
+    { id: 1, title: 'Traditionals', subtitle: 'Timeless Elegance', bgClass: styles.bg1, font: 'var(--font-yuji-boku)', link: '/traditionals' },
+    { id: 2, title: 'Street Style', subtitle: 'Urban Essentials', bgClass: styles.bg2, font: 'var(--font-anton)', link: '/street-style' },
+    { id: 3, title: 'Formal Wear', subtitle: 'Sophisticated Cuts', bgClass: styles.bg3, font: 'var(--font-playfair-display)', link: '/formal-wear' },
+    { id: 4, title: 'Casual Fits', subtitle: 'Everyday Comfort', bgClass: styles.bg4, font: 'var(--font-roboto-mono)', link: '/casual-wear' },
 ];
 
 interface HeroProps {
@@ -52,30 +21,26 @@ interface HeroProps {
 
 export default function Hero({ onSlideChange }: HeroProps) {
     const [currentSlide, setCurrentSlide] = useState(0);
-    // Key to force re-render of animation when slide changes manually or automatically
-    const [animKey, setAnimKey] = useState(0);
 
-    // Function to go to next slide
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-        setAnimKey(prev => prev + 1);
+    // Auto-slide logic
+    useEffect(() => {
+        const timer = setInterval(() => {
+            handleNextSlide();
+        }, SLIDE_DURATION);
+
+        return () => clearInterval(timer);
+    }, [currentSlide]);
+
+    const handleNextSlide = () => {
+        const next = (currentSlide + 1) % slides.length;
+        setCurrentSlide(next);
+        if (onSlideChange) onSlideChange(slides[next].font);
     };
 
-    const goToSlide = (index: number) => {
+    const handleDotClick = (index: number) => {
         setCurrentSlide(index);
-        setAnimKey(prev => prev + 1);
+        if (onSlideChange) onSlideChange(slides[index].font);
     };
-
-    useEffect(() => {
-        const interval = setInterval(nextSlide, SLIDE_DURATION);
-        return () => clearInterval(interval);
-    }, []); // Dependency on currentSlide removed to prevent interval reset on manual change
-
-    useEffect(() => {
-        if (onSlideChange) {
-            onSlideChange(slides[currentSlide].font);
-        }
-    }, [currentSlide, onSlideChange]);
 
     return (
         <div className={styles.hero}>
@@ -83,48 +48,46 @@ export default function Hero({ onSlideChange }: HeroProps) {
                 {slides.map((slide, index) => (
                     <div
                         key={slide.id}
-                        className={`${styles.slide} ${styles[slide.bgClass]} ${index === currentSlide ? styles.active : ''}`}
+                        className={`${styles.slide} ${index === currentSlide ? styles.active : ''
+                            } ${slide.bgClass}`}
                     >
-                        <div className={styles.content}>
-                            <h1 className={styles.title}>{slide.title}</h1>
-                            <Link href={slide.link}>
-                                <button className={styles.shopButton}>SHOP NOW</button>
-                            </Link>
-                        </div>
+                        {/* Only render content if active to re-trigger animations or handle visibility */}
+                        {index === currentSlide && (
+                            <div className={styles.content}>
+                                <FadeIn direction="up" delay={0.2}>
+                                    <h1 className={styles.title} style={{ fontFamily: slide.font }}>
+                                        {slide.title}
+                                    </h1>
+                                </FadeIn>
+                                <FadeIn direction="up" delay={0.4}>
+                                    <p className={styles.subtitle}>{slide.subtitle}</p>
+                                </FadeIn>
+                                <FadeIn direction="up" delay={0.6}>
+                                    <MagneticButton className="cursor-hover">
+                                        <Link href={slide.link}>
+                                            <button className={styles.shopButton}>SHOP NOW</button>
+                                        </Link>
+                                    </MagneticButton>
+                                </FadeIn>
+                            </div>
+                        )}
+
+
                     </div>
                 ))}
             </div>
 
             <div className={styles.dotsContainer}>
                 {slides.map((_, index) => (
-                    <div key={index} className={styles.dotWrapper} onClick={() => goToSlide(index)}>
-                        <div className={`${styles.dot} ${index === currentSlide ? styles.activeDot : ''}`}></div>
-
-                        {/* Loading ring only for active dot */}
-                        {index === currentSlide && (
-                            <svg className={styles.loaderSvg} width="24" height="24" viewBox="0 0 24 24">
-                                <circle
-                                    className={styles.progressCircle}
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    // Circumference = 2 * pi * 10 ~= 62.8
-                                    // dash-offset animation from 62.8 to 0
-                                    style={{
-                                        strokeDasharray: '62.8',
-                                        strokeDashoffset: '62.8',
-                                        animation: `dash ${SLIDE_DURATION}ms linear forwards`
-                                    }}
-                                />
-                                <style jsx>{`
-                  @keyframes dash {
-                    to {
-                      stroke-dashoffset: 0;
-                    }
-                  }
-                `}</style>
-                            </svg>
-                        )}
+                    <div
+                        key={index}
+                        className={styles.dotWrapper}
+                        onClick={() => handleDotClick(index)}
+                    >
+                        <div
+                            className={`${styles.dot} ${index === currentSlide ? styles.activeDot : ''
+                                }`}
+                        />
                     </div>
                 ))}
             </div>

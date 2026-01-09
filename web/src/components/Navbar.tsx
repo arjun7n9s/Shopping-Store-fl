@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SideDrawer from './SideDrawer';
 import styles from './Navbar.module.css';
 import { useCart } from '@/context/CartContext';
+import MagneticButton from './animations/MagneticButton';
 
 interface NavbarProps {
   titleFont: string;
@@ -42,18 +43,28 @@ export default function Navbar({
     setSearchQuery('');
   };
 
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
-      <nav className={styles.navbar} style={{ color: textColor }}>
+      <nav className={`${styles.navbar} ${hasScrolled ? styles.scrolled : ''}`} style={{ color: hasScrolled ? 'var(--text-primary)' : textColor }}>
         {/* Left Section - Desktop Menu & Mobile Hamburger */}
         <div className={styles.left}>
           <Link href="/women" className={styles.navLink}>Women</Link>
           <Link href="/men" className={styles.navLink}>Men</Link>
-          <Link href="/accessories" className={styles.navLink}>Accessories</Link>
         </div>
-        
+
         <button className={styles.menuBtn} onClick={() => setActiveDrawer('mobileMenu')}>
-            <Menu className={styles.icon} />
+          <Menu className={styles.icon} />
         </button>
 
         <div className={styles.center}>
@@ -65,9 +76,15 @@ export default function Navbar({
         </div>
 
         <div className={styles.right}>
-          <Link href="/account"><User className={styles.icon} /></Link>
-          <div onClick={() => setActiveDrawer('wishlist')}><Heart className={styles.icon} /></div>
-          <div onClick={() => setActiveDrawer('wallet')}><Wallet className={styles.icon} /></div>
+          <MagneticButton>
+            <Link href="/account"><User className={styles.icon} /></Link>
+          </MagneticButton>
+          <MagneticButton>
+            <div onClick={() => setActiveDrawer('wishlist')}><Heart className={styles.icon} /></div>
+          </MagneticButton>
+          <MagneticButton>
+            <div onClick={() => setActiveDrawer('wallet')}><Wallet className={styles.icon} /></div>
+          </MagneticButton>
 
           {/* Search Wrapper ... */}
           <motion.div
@@ -77,7 +94,9 @@ export default function Navbar({
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             onClick={handleSearchClick}
           >
-            <Search className={styles.icon} style={{ minWidth: '24px' }} />
+            <MagneticButton>
+              <Search className={styles.icon} style={{ minWidth: '24px' }} />
+            </MagneticButton>
             <AnimatePresence>
               {isSearchOpen && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className={styles.searchContent}>
@@ -94,10 +113,12 @@ export default function Navbar({
             </AnimatePresence>
           </motion.div>
 
-          <div onClick={openCart} className={styles.bagContainer}>
-            <ShoppingBag className={styles.icon} />
-            {cartCount > 0 && <span className={styles.badge} style={{ backgroundColor: textColor === 'white' ? 'white' : 'black', color: textColor === 'white' ? 'black' : 'white' }}>{cartCount}</span>}
-          </div>
+          <MagneticButton>
+            <div onClick={openCart} className={styles.bagContainer}>
+              <ShoppingBag className={styles.icon} />
+              {cartCount > 0 && <span className={styles.badge} style={{ backgroundColor: textColor === 'white' ? 'white' : 'black', color: textColor === 'white' ? 'black' : 'white' }}>{cartCount}</span>}
+            </div>
+          </MagneticButton>
         </div>
       </nav>
 
@@ -145,12 +166,11 @@ export default function Navbar({
 
       <SideDrawer isOpen={activeDrawer === 'mobileMenu'} onClose={() => setActiveDrawer(null)} title="MENU">
         <div className={styles.drawerItem} style={{ flexDirection: 'column', gap: '1.5rem', fontSize: '1.2rem' }}>
-             <Link href="/women" onClick={() => setActiveDrawer(null)} className={styles.navLink}>WOMEN</Link>
-             <Link href="/men" onClick={() => setActiveDrawer(null)} className={styles.navLink}>MEN</Link>
-             <Link href="/accessories" onClick={() => setActiveDrawer(null)} className={styles.navLink}>ACCESSORIES</Link>
-             <hr style={{borderColor: '#eee'}} />
-             <Link href="/account" onClick={() => setActiveDrawer(null)} className={styles.navLink}>MY ACCOUNT</Link>
-             <Link href="/wishlist" onClick={() => setActiveDrawer(null)} className={styles.navLink}>WISHLIST</Link>
+          <Link href="/women" onClick={() => setActiveDrawer(null)} className={styles.navLink}>WOMEN</Link>
+          <Link href="/men" onClick={() => setActiveDrawer(null)} className={styles.navLink}>MEN</Link>
+          <hr style={{ borderColor: '#eee' }} />
+          <Link href="/account" onClick={() => setActiveDrawer(null)} className={styles.navLink}>MY ACCOUNT</Link>
+          <Link href="/wishlist" onClick={() => setActiveDrawer(null)} className={styles.navLink}>WISHLIST</Link>
         </div>
       </SideDrawer>
     </>

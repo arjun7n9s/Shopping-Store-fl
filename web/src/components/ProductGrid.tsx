@@ -25,14 +25,15 @@ export default function ProductGrid({ products = PRODUCTS }: ProductGridProps) {
         <div className={styles.container}>
             <motion.div layout className={styles.grid}>
                 <AnimatePresence>
-                    {products.map((prod) => (
+                    {products.map((prod, index) => (
                         <motion.div
                             layout
                             key={prod.id}
-                            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)', y: 20 }}
+                            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)', y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                            transition={{ duration: 0.5 }}
+                            transition={{ duration: 0.4, delay: index * 0.05, ease: "easeOut" }}
+                            viewport={{ once: true }}
                         >
                             <ProductCard
                                 product={prod}

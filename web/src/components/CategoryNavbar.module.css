@@ -265,3 +265,43 @@
         letter-spacing: 0;
     }
 }
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-top: none;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.dropdownItemLink {
+    text-decoration: none;
+    display: block;
+}
+
+.dropdownItem {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: var(--color-text-primary);
+    transition: background-color 0.2s;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdownItem:hover {
+    background-color: var(--bg-secondary);
+    color: var(--accent-primary);
+}
+
+.navItemWrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}

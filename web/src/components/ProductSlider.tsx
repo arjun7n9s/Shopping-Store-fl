@@ -1,58 +1,50 @@
 import styles from './ProductSlider.module.css';
 
+import { PRODUCTS } from '@/data/products';
+import FadeIn from './animations/FadeIn';
+
 interface ProductSliderProps {
     title: string;
+    gender?: 'Men' | 'Women';
+    filter?: 'Bestseller' | 'New' | 'All';
 }
 
-const dummyProducts = [
-    { id: 1, name: "Essential Tee", price: "Rs. 999" },
-    { id: 2, name: "Relaxed Fit Hoodie", price: "Rs. 1,999" },
-    { id: 3, name: "Carpenter Jeans", price: "Rs. 2,499" },
-    { id: 4, name: "Puffer Jacket", price: "Rs. 3,499" },
-    { id: 5, name: "Corduroy Shirt", price: "Rs. 1,799" },
-];
+export default function ProductSlider({ title, gender, filter = 'All' }: ProductSliderProps) {
+    const products = PRODUCTS.filter(p => {
+        if (gender && p.category !== gender) return false;
+        if (filter === 'New' && !p.isNew) return false;
+        return true;
+    }).slice(0, 10); // Limit to 10 items for slider
 
-export default function ProductSlider({ title }: ProductSliderProps) {
+    // Duplicate for infinite scroll effect if needed, or just map standard if carousel logic changes
+    // The CSS module seems to imply a marquee or continuous scroll. 
+    // Let's just render the products.
+
     return (
         <section className={styles.sliderContainer}>
             <header className={styles.header}>
-                <h2 className={styles.heading}>{title}</h2>
+                <FadeIn direction="up">
+                    <h2 className={styles.heading}>{title}</h2>
+                </FadeIn>
             </header>
 
-            <div className={styles.carousel}>
-                <div className={styles.track}>
-                    {/* Set 1 */}
-                    {dummyProducts.map(p => (
-                        <div key={p.id} className={styles.card}>
-                            <div className={styles.image}></div>
-                            <div className={styles.info}>
-                                <h3 className={styles.productName}>{p.name}</h3>
-                                <p className={styles.productPrice}>{p.price}</p>
+            <FadeIn direction="up" delay={0.2}>
+                <div className={styles.carousel}>
+                    <div className={styles.track}>
+                        {/* Render products twice for smooth infinite loop if CSS is set up that way */}
+                        {[...products, ...products].map((p, i) => (
+                            <div key={`${p.id}-${i}`} className={styles.card}>
+                                {/* Use first image or placeholder */}
+                                <div className={styles.image} style={{ backgroundImage: `url(${p.images[0]})` }}></div>
+                                <div className={styles.info}>
+                                    <h3 className={styles.productName}>{p.name}</h3>
+                                    <p className={styles.productPrice}>Rs. {p.price.toLocaleString()}</p>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                    {/* Set 2 */}
-                    {dummyProducts.map(p => (
-                        <div key={`d-${p.id}`} className={styles.card}>
-                            <div className={styles.image}></div>
-                            <div className={styles.info}>
-                                <h3 className={styles.productName}>{p.name}</h3>
-                                <p className={styles.productPrice}>{p.price}</p>
-                            </div>
-                        </div>
-                    ))}
-                    {/* Set 3 */}
-                    {dummyProducts.map(p => (
-                        <div key={`t-${p.id}`} className={styles.card}>
-                            <div className={styles.image}></div>
-                            <div className={styles.info}>
-                                <h3 className={styles.productName}>{p.name}</h3>
-                                <p className={styles.productPrice}>{p.price}</p>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </FadeIn>
         </section>
     );
 }

@@ -88,9 +88,9 @@ export default function Home() {
       <section id="split"><SplitScreen /></section>
       <section id="marquee"><ProductMarquee /></section>
       <section id="fabric"><FabricSlider /></section>
-      <section id="bestsellers"><ProductSlider title="Best Sellers" /></section>
-      <section id="shopmen"><ProductSlider title="Shop Men" /></section>
-      <section id="shopwomen"><ProductSlider title="Shop Women" /></section>
+      <section id="bestsellers"><ProductSlider title="Best Sellers" filter="Bestseller" /></section>
+      <section id="shopmen"><ProductSlider title="Shop Men" gender="Men" /></section>
+      <section id="shopwomen"><ProductSlider title="Shop Women" gender="Women" /></section>
       <section id="reels"><VideoReels /></section>
       <section id="info"><InfoSection /></section>
       <section id="footer"><Footer /></section>

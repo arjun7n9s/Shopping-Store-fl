@@ -4,24 +4,20 @@ import CategoryProductSection from '../../components/CategoryProductSection';
 import Footer from '../../components/Footer';
 
 const MEN_CATEGORIES = [
-    { label: 'HATS & CAPS', iconName: 'User' },
-    { label: 'TSHIRTS', iconName: 'Shirt' },
-    { label: 'WALLETS', iconName: 'Wallet' },
+    { label: 'T-SHIRT', iconName: 'Shirt' },
     { label: 'SHIRTS', iconName: 'Shirt' },
     { label: 'BOTTOMS', iconName: 'Layers' },
-    { label: 'ACCESSORIES', iconName: 'Briefcase' },
-    { label: 'BACKPACK', iconName: 'Backpack' },
     { label: 'JACKETS', iconName: 'Package' },
-    { label: 'HOODIES', iconName: 'Box' },
-    { label: 'SKATEBOARDS', iconName: 'MousePointer2' },
+    { label: 'HOODIE', iconName: 'Box' },
+    { label: 'ACTIVEWEAR', iconName: 'Flame' },
 ];
 
 export default function MenPage() {
     return (
         <main style={{ minHeight: '100vh', backgroundColor: '#FFF7F1' }}>
-            <CategoryNavbar />
+            <CategoryNavbar gender="Men" />
             <CategoryHero title="MEN'S COLLECTION" />
-            <CategoryProductSection categories={MEN_CATEGORIES} />
+            <CategoryProductSection categories={MEN_CATEGORIES} gender="Men" />
             <Footer />
         </main>
     );

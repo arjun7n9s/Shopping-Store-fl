@@ -8,8 +8,7 @@ import Footer from '../../components/Footer';
 const STREET_CATEGORIES = [
     { label: 'Hoodies', iconName: 'Layers' },
     { label: 'Oversized', iconName: 'Shirt' },
-    { label: 'Joggers', iconName: 'Grid' },
-    { label: 'Caps', iconName: 'Circle' } // Using Circle for Hats/Caps
+    { label: 'Joggers', iconName: 'Grid' }
 ];
 
 export default function StreetStylePage() {

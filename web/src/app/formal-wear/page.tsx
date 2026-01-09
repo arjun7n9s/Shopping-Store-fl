@@ -5,18 +5,19 @@ import CategoryHero from '../../components/CategoryHero';
 import CategoryProductSection from '../../components/CategoryProductSection';
 import Footer from '../../components/Footer';
 
-const MERCH_CATEGORIES = [
-    { label: 'Marvel', iconName: 'Star' },
-    { label: 'Anime', iconName: 'Flame' },
-    { label: 'Bands', iconName: 'Sparkles' }
+const FORMAL_CATEGORIES = [
+    { label: 'Suits', iconName: 'Briefcase' },
+    { label: 'Blazers', iconName: 'Shirt' },
+    { label: 'Trousers', iconName: 'Layers' },
+    { label: 'Shirts', iconName: 'Shirt' }
 ];
 
-export default function MerchandisePage() {
+export default function FormalWearPage() {
     return (
         <main style={{ minHeight: '100vh', backgroundColor: '#FFF7F1' }}>
             <CategoryNavbar />
-            <CategoryHero title="MERCHANDISE" />
-            <CategoryProductSection categories={MERCH_CATEGORIES} limitToCollections={true} />
+            <CategoryHero title="FORMAL WEAR" />
+            <CategoryProductSection categories={FORMAL_CATEGORIES} />
             <Footer />
         </main>
     );

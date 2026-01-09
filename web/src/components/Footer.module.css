@@ -1,8 +1,21 @@
 .footer {
     background-color: var(--dark-primary);
     color: var(--bg-secondary);
-    padding: 4rem 2rem 2rem;
+    padding: 6rem 2rem 2rem;
+    /* Increased top padding */
     font-family: var(--font-roboto-mono);
+    position: relative;
+}
+
+.footer::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--dark-primary));
+    pointer-events: none;
 }
 
 .topSection {

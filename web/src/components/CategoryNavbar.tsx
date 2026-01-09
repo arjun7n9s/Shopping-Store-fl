@@ -14,18 +14,17 @@ import { useCart } from '@/context/CartContext';
 const MEN_LINKS = [
     { label: 'NEW ARRIVALS', href: '/new-arrivals' },
     { label: 'BEST SELLERS', href: '/best-sellers' },
-    { label: 'WINTERWEAR', href: '/winter-essentials' },
+    { label: 'WINTERWEAR', hasDropdown: true, href: '/winter-essentials' },
     { label: 'CLOTHING', hasDropdown: true, href: '/men' },
-    { label: 'ACCESSORIES', hasDropdown: true, href: '/accessories' },
-    { label: 'JAPANESE EDITION', href: '#' },
     { label: 'SALE', href: '#' }
 ];
 
 interface CategoryNavbarProps {
     links?: { label: string; hasDropdown?: boolean; href?: string }[];
+    gender?: 'Men' | 'Women';
 }
 
-export default function CategoryNavbar({ links = MEN_LINKS }: CategoryNavbarProps) {
+export default function CategoryNavbar({ links = MEN_LINKS, gender = 'Men' }: CategoryNavbarProps) {
     const [isVisible, setIsVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isAtTop, setIsAtTop] = useState(true);
@@ -63,12 +62,35 @@ export default function CategoryNavbar({ links = MEN_LINKS }: CategoryNavbarProp
 
     const getDropdownContent = (label: string) => {
         if (label === 'CLOTHING') {
-            return ['T-Shirts & Polos', 'Casual Shirts', 'Jeans & Trousers', 'Jackets & Coats', 'Sweatshirts'];
+            if (gender === 'Women') {
+                return [
+                    { label: 'Dresses', href: '/women?category=DRESSES' },
+                    { label: 'Tops & T-Shirts', href: '/women?category=TOPS' },
+                    { label: 'Co-ords', href: '/women?category=CO-ORDS' },
+                    { label: 'Jackets', href: '/women?category=JACKETS' },
+                    { label: 'Bottoms', href: '/women?category=BOTTOMS' }
+                ];
+            }
+            // Default Men
+            return [
+                { label: 'T-Shirts & Polos', href: '/men?category=TSHIRTS' },
+                { label: 'Casual Shirts', href: '/men?category=SHIRTS' },
+                { label: 'Jeans & Trousers', href: '/men?category=BOTTOMS' },
+                { label: 'Jackets & Coats', href: '/men?category=JACKETS' },
+                { label: 'Hoodies', href: '/men?category=HOODIES' }
+            ];
         }
-        if (label === 'ACCESSORIES') {
-            return ['Watches', 'Bags & Backpacks', 'Hats & Caps', 'Belts & Wallets', 'Sunglasses'];
+        if (label === 'WINTERWEAR') {
+            return [
+                { label: 'Jackets', href: '/winter-essentials?category=Jackets' },
+                { label: 'Sweaters', href: '/winter-essentials?category=Sweaters' },
+                { label: 'Thermals', href: '/winter-essentials?category=Thermals' },
+                { label: 'Winter Coats', href: '/winter-essentials?category=Coats' }
+            ];
         }
-        return ['New Collection', 'Trending', 'Sale'];
+        return [
+            { label: 'New Collection', href: '/new-arrivals' }
+        ];
     };
 
     return (
@@ -141,9 +163,11 @@ export default function CategoryNavbar({ links = MEN_LINKS }: CategoryNavbarProp
                                             transition={{ duration: 0.2 }}
                                         >
                                             {getDropdownContent(link.label).map((item) => (
-                                                <div key={item} className={styles.dropdownItem}>
-                                                    {item}
-                                                </div>
+                                                <Link key={item.label} href={item.href} className={styles.dropdownItemLink}>
+                                                    <div className={styles.dropdownItem}>
+                                                        {item.label}
+                                                    </div>
+                                                </Link>
                                             ))}
                                         </motion.div>
                                     )}

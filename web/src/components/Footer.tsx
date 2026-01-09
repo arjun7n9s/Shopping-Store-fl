@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Facebook, Instagram, Twitter, Linkedin, ArrowRight, ChevronUp } from 'lucide-react';
 import styles from './Footer.module.css';
 import logoImg from './shopping-store-logo.png'; // Renamed file import
+import MagneticButton from './animations/MagneticButton';
 
 export default function Footer() {
     const scrollToTop = () => {
@@ -21,11 +22,12 @@ export default function Footer() {
                             <Image src={logoImg} alt="SHOPPING STORE" className={styles.logo} width={200} height={50} style={{ objectFit: 'contain' }} />
                         </Link>
                     </div>
+
                     <div className={styles.socials}>
-                        <Link href="#"><Facebook className={styles.socialIcon} /></Link>
-                        <Link href="#"><Instagram className={styles.socialIcon} /></Link>
-                        <Link href="#"><Twitter className={styles.socialIcon} /></Link>
-                        <Link href="#"><Linkedin className={styles.socialIcon} /></Link>
+                        <MagneticButton><Link href="#"><Facebook className={styles.socialIcon} /></Link></MagneticButton>
+                        <MagneticButton><Link href="#"><Instagram className={styles.socialIcon} /></Link></MagneticButton>
+                        <MagneticButton><Link href="#"><Twitter className={styles.socialIcon} /></Link></MagneticButton>
+                        <MagneticButton><Link href="#"><Linkedin className={styles.socialIcon} /></Link></MagneticButton>
                     </div>
                 </div>
 
@@ -33,11 +35,9 @@ export default function Footer() {
                 <div className={styles.linksColumn}>
                     <h3 className={styles.columnTitle}>SHOP</h3>
                     <ul className={styles.linkList}>
-                        <li className={styles.linkItem}><Link href="/best-sellers" className={styles.link}>Best Sellers</Link></li>
                         <li className={styles.linkItem}><Link href="/new-arrivals" className={styles.link}>New Arrivals</Link></li>
                         <li className={styles.linkItem}><Link href="/men" className={styles.link}>Men's Collection</Link></li>
                         <li className={styles.linkItem}><Link href="/women" className={styles.link}>Women's Collection</Link></li>
-                        <li className={styles.linkItem}><Link href="/accessories" className={styles.link}>Accessories</Link></li>
                     </ul>
                 </div>
 
