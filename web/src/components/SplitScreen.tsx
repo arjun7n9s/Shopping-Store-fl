@@ -4,29 +4,27 @@ import { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './SplitScreen.module.css';
 import { ArrowRight } from 'lucide-react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-// Helper to get correct path with basePath
 const getAssetPath = (path: string) => {
+    // For local dev, we might not need the base path, but for production we do.
+    // Ideally this is handled by an env var, but hardcoding for the rapid fix.
     const basePath = '/Shopping-Store-fl';
     return `${basePath}${path}`;
 };
 
 export default function SplitScreen() {
-    const containerRef = useRef(null);
-    const isInView = useInView(containerRef, { once: true, margin: "-10%" });
-
     const menVideoRef = useRef<HTMLVideoElement>(null);
     const womenVideoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        // Ensure videos play when component mounts/is in view
-        if (menVideoRef.current) menVideoRef.current.play().catch(e => console.log("Autoplay blocked", e));
-        if (womenVideoRef.current) womenVideoRef.current.play().catch(e => console.log("Autoplay blocked", e));
+        // Ensure videos play so they are ready to be revealed
+        if (menVideoRef.current) menVideoRef.current.play().catch(() => { });
+        if (womenVideoRef.current) womenVideoRef.current.play().catch(() => { });
     }, []);
 
     return (
-        <section className={styles.splitScreen} ref={containerRef}>
+        <section className={styles.splitScreen}>
             {/* MEN SIDE */}
             <div className={`${styles.side} ${styles.menSide}`}>
                 <div className={styles.videoWrapper}>
@@ -37,25 +35,19 @@ export default function SplitScreen() {
                         muted
                         loop
                         playsInline
-                        poster={getAssetPath("/videos/men-poster.jpg")} // Optional poster if you have one
+                        poster={getAssetPath("/videos/men-poster.jpg")}
                     >
                         <source src={getAssetPath("/videos/Men.mp4")} type="video/mp4" />
-                        Your browser does not support the video tag.
                     </video>
-                    <div className={styles.overlay} />
                 </div>
+                <div className={styles.overlay} />
 
-                <motion.div
-                    className={styles.content}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                >
+                <div className={styles.content}>
                     <h2 className={styles.title}>FOR HIM</h2>
                     <Link href="/men" className={styles.link}>
-                        SHOP MEN <ArrowRight className={styles.icon} />
+                        SHOP MEN <ArrowRight size={24} />
                     </Link>
-                </motion.div>
+                </div>
             </div>
 
             {/* WOMEN SIDE */}
@@ -70,22 +62,16 @@ export default function SplitScreen() {
                         playsInline
                     >
                         <source src={getAssetPath("/videos/Women.mp4")} type="video/mp4" />
-                        Your browser does not support the video tag.
                     </video>
-                    <div className={styles.overlay} />
                 </div>
+                <div className={styles.overlay} />
 
-                <motion.div
-                    className={styles.content}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                    transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                >
+                <div className={styles.content}>
                     <h2 className={styles.title}>FOR HER</h2>
                     <Link href="/women" className={styles.link}>
-                        SHOP WOMEN <ArrowRight className={styles.icon} />
+                        SHOP WOMEN <ArrowRight size={24} />
                     </Link>
-                </motion.div>
+                </div>
             </div>
         </section>
     );
