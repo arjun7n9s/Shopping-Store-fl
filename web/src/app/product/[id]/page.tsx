@@ -187,3 +187,9 @@ export default function ProductPage() {
         </main>
     );
 }
+
+export function generateStaticParams() {
+    return PRODUCTS.map((product) => ({
+        id: product.id,
+    }));
+}
