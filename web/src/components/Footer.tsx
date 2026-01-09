@@ -46,8 +46,8 @@ export default function Footer() {
                     <ul className={styles.linkList}>
                         <li className={styles.linkItem}><Link href="/winter-essentials" className={styles.link}>Winter Essentials</Link></li>
                         <li className={styles.linkItem}><Link href="/street-style" className={styles.link}>Streetwear Edit</Link></li>
-                        <li className={styles.linkItem}><Link href="#" className={styles.link}>Oversized Fits</Link></li>
-                        <li className={styles.linkItem}><Link href="#" className={styles.link}>Party Wear</Link></li>
+                        <li className={styles.linkItem}><Link href="/oversized-fits" className={styles.link}>Oversized Fits</Link></li>
+                        <li className={styles.linkItem}><Link href="/party-wear" className={styles.link}>Party Wear</Link></li>
                         <li className={styles.linkItem}><Link href="/casual-wear" className={styles.link}>Basics</Link></li>
                     </ul>
                 </div>
