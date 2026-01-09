@@ -19,7 +19,7 @@ export default function SplitScreen() {
     useEffect(() => {
         const handleTimeUpdate = (e: Event) => {
             const video = e.target as HTMLVideoElement;
-            if (video.duration > 0 && video.currentTime >= video.duration - 2) {
+            if (video.duration > 0 && video.currentTime >= video.duration - 3) {
                 video.currentTime = 0;
                 video.play().catch(() => { });
             }
