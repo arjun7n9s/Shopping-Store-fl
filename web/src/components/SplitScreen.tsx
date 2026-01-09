@@ -8,7 +8,6 @@ import { motion } from 'framer-motion';
 
 const getAssetPath = (path: string) => {
     // For local dev, we might not need the base path, but for production we do.
-    // Ideally this is handled by an env var, but hardcoding for the rapid fix.
     const basePath = '/Shopping-Store-fl';
     return `${basePath}${path}`;
 };
@@ -18,9 +17,32 @@ export default function SplitScreen() {
     const womenVideoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
-        // Ensure videos play so they are ready to be revealed
-        if (menVideoRef.current) menVideoRef.current.play().catch(() => { });
-        if (womenVideoRef.current) womenVideoRef.current.play().catch(() => { });
+        const handleTimeUpdate = (e: Event) => {
+            const video = e.target as HTMLVideoElement;
+            if (video.duration > 0 && video.currentTime >= video.duration - 2) {
+                video.currentTime = 0;
+                video.play().catch(() => { });
+            }
+        };
+
+        const setupVideo = (videoRef: React.RefObject<HTMLVideoElement | null>) => {
+            const video = videoRef.current;
+            if (video) {
+                video.addEventListener('timeupdate', handleTimeUpdate);
+                video.play().catch(() => { });
+            }
+            return () => {
+                if (video) video.removeEventListener('timeupdate', handleTimeUpdate);
+            };
+        };
+
+        const cleanupMen = setupVideo(menVideoRef);
+        const cleanupWomen = setupVideo(womenVideoRef);
+
+        return () => {
+            cleanupMen();
+            cleanupWomen();
+        };
     }, []);
 
     return (
